@@ -18,34 +18,28 @@ describe('Description', () => {
 
   it('should initialize without value', () => {
     //#region ARRANGES
-    const html = fixture.nativeElement as HTMLElement;
-    const textArea = html.querySelector('[data_test-textArea]') as HTMLTextAreaElement;
     //#endregion
 
     //#region ACTIONS
-    // fill with actions
     //#endregion
 
     //#region ASSERTIONS
-    expect(textArea.value).toBe('');
+    expect(component.form.value).toBe('');
     //#endregion
   });
 
   it('should accept until 250 characters', () => {
     //#region ARRANGES
-    const html = fixture.nativeElement as HTMLElement;
-    const textArea = html.querySelector('[data_test-textArea]') as HTMLTextAreaElement;
-    //#region mockValue
-    const mockValue = 'testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes testes teste teste testes;'
-    //#endregion
+    const mockValue = 'a'.repeat(250);
     //#endregion
 
     //#region ACTIONS
-    textArea.value = mockValue;
+    component.form.setValue(mockValue);
     //#endregion
 
     //#region ASSERTIONS
-    expect(textArea.value.length).toBeLessThanOrEqual(250);
+    expect((component.form.value as string).length).toBeLessThanOrEqual(250);
+    expect(component.form.valid).toBeTruthy();
     //#endregion
   });
 });
